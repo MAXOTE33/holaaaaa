@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrada para Elizabeth</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Para ti, Corazón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -13,76 +13,134 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: url('images/b50688e20c3f2638f743988f2c9684b5.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Open Sans', sans-serif;
-            color: #333;
+            background: linear-gradient(135deg, #ff99cc, #333333);
+            font-family: 'Roboto', sans-serif;
+            color: white;
             overflow: hidden;
             position: relative;
         }
 
-        /* Capa de superposición para suavizar el fondo */
-        body::before {
+        /* Corazones de fondo animados */
+        .background-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6666;
+            transform: rotate(45deg);
+            animation: float-bg 10s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .background-heart::before,
+        .background-heart::after {
             content: '';
             position: absolute;
-            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6666;
+            border-radius: 50%;
+        }
+
+        .background-heart::before {
+            top: -10px;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2); /* Capa oscura suave para mejorar legibilidad */
-            z-index: -1;
         }
 
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: rgba(135, 206, 235, 0.7); /* Celeste cielo con transparencia */
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        .background-heart::after {
+            left: -10px;
+            top: 0;
         }
 
-        input[type="password"] {
-            padding: 10px;
-            font-size: 1.2em;
-            width: 200px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            font-family: 'Open Sans', sans-serif;
+        @keyframes float-bg {
+            0% { transform: translateY(100vh) rotate(45deg); opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
         }
 
-        button {
-            padding: 15px 30px;
-            font-size: 1.3em;
-            background-color: #ff66b2; /* Rosa romántico para el botón */
+        #initial-button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background-color: #ff66b2;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: transform 0.3s, background-color 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Great Vibes', cursive;
+            z-index: 10;
         }
 
-        button:hover {
+        #initial-button:hover {
             background-color: #e60073;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
-        #error-message {
+        #content {
             display: none;
-            font-size: 1.2em;
-            color: #ff3333;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        #content.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
             text-align: center;
-            margin-top: 15px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 10px;
-            animation: fadeIn 0.5s ease-in;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        h1.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .snoopy-img {
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        .snoopy-img.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #message {
+            font-size: 1.7em;
+            text-align: center;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Roboto', sans-serif;
+            animation: fadeIn 1s ease-in;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        #message.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @keyframes fadeIn {
@@ -90,52 +148,141 @@
             to { opacity: 1; }
         }
 
+        .heart {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #ff3333;
+            transform: rotate(45deg);
+            animation: float 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #ff3333;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -12.5px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: -12.5px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 1em;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .footer.show {
+            opacity: 1;
+        }
+
         @media (max-width: 600px) {
-            .login-container {
-                padding: 20px;
+            h1 {
+                font-size: 2.5em;
             }
-            input[type="password"] {
-                width: 180px;
-                font-size: 1em;
+            .snoopy-img {
+                max-width: 250px;
             }
-            button {
-                font-size: 1.1em;
+            #initial-button {
+                font-size: 1.2em;
                 padding: 12px 24px;
             }
-            #error-message {
-                font-size: 1em;
+            #message {
+                font-size: 1.3em;
+            }
+            .footer {
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <input type="password" id="password" placeholder="Ingresa la contraseña">
-        <button onclick="checkPassword()">Entrar</button>
-        <div id="error-message"></div>
+    <button id="initial-button">Clic aquí</button>
+    <div id="content">
+        <h1 id="title">Para ti, Corazón</h1>
+        <img src="images/13b5295c57af572374d050a8ff19e460.jpg" alt="Snoopy con flores" class="snoopy-img">
+        <div id="message"></div>
     </div>
+    <div class="footer">Esta página se creó especialmente de Max para Elizabeth &copy; 2025  FIN BAI</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
-
-            if (password === 'holaaa') {
-                window.location.href = 'entrada.html';
-            } else {
-                errorMessage.style.display = 'block';
-                errorMessage.textContent = 'Contraseña incorrecta, intenta de nuevo';
-                setTimeout(() => {
-                    errorMessage.style.display = 'none';
-                }, 3000);
+        // Crear corazones de fondo al cargar la página
+        function createBackgroundHearts() {
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'background-heart';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 10000);
             }
         }
+        setInterval(createBackgroundHearts, 2000); // Crear corazones cada 2 segundos
+        createBackgroundHearts(); // Crear corazones iniciales
 
-        // Permitir enviar la contraseña con la tecla Enter
-        document.getElementById('password').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
+        const initialButton = document.getElementById('initial-button');
+        const content = document.getElementById('content');
+        const title = document.getElementById('title');
+        const image = document.querySelector('.snoopy-img');
+        const messageDiv = document.getElementById('message');
+        const footer = document.querySelector('.footer');
+
+        initialButton.addEventListener('click', () => {
+            initialButton.style.display = 'none';
+            content.classList.add('show');
+            footer.classList.add('show');
+            setTimeout(() => {
+                title.classList.add('show');
+                image.classList.add('show');
+                messageDiv.classList.add('show');
+                messageDiv.textContent = 'Te quiero mucho, Elizabeth, con todo mi corazón';
+
+                // Efecto de confeti
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#ff99cc', '#ff66b2', '#ffffff', '#ff3333'],
+                    angle: Math.random() * 360
+                });
+
+                // Crear corazones flotantes
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.style.left = `${Math.random() * 100}vw`;
+                    heart.style.animationDelay = `${Math.random() * 3}s`;
+                    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }
+            }, 100);
         });
     </script>
 </body>
